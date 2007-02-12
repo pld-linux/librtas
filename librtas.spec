@@ -1,5 +1,5 @@
 Summary:	Libraries for user-space access to the Run-Time Abstraction Services
-Summary(pl):	Biblioteki do dostêpu do RTAS z przestrzeni u¿ytkownika
+Summary(pl.UTF-8):   Biblioteki do dostÄ™pu do RTAS z przestrzeni uÅ¼ytkownika
 Name:		librtas
 Version:	1.3.0
 Release:	1
@@ -15,33 +15,33 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 librtas provides a set of libraries for user-space access to the
 Run-Time Abstraction Services (RTAS) on the PowerPC architecture.
 
-%description -l pl
-Ten pakiet udostêpnia zbiór bibliotek do dostêpu z przestrzeni
-u¿ytkownika do RTAS (Run-Time Abstraction Services) na architekturze
+%description -l pl.UTF-8
+Ten pakiet udostÄ™pnia zbiÃ³r bibliotek do dostÄ™pu z przestrzeni
+uÅ¼ytkownika do RTAS (Run-Time Abstraction Services) na architekturze
 PowerPC.
 
 %package devel
 Summary:	Header files for librtas library
-Summary(pl):	Pliki nag³ówkowe biblioteki librtas
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe biblioteki librtas
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for librtas library.
 
-%description devel -l pl
-Pliki nag³ówkowe biblioteki librtas.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe biblioteki librtas.
 
 %package static
 Summary:	Static librtas library
-Summary(pl):	Statyczna biblioteka librtas
+Summary(pl.UTF-8):   Statyczna biblioteka librtas
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static librtas library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka librtas.
 
 %prep
