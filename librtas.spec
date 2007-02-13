@@ -1,5 +1,5 @@
 Summary:	Libraries for user-space access to the Run-Time Abstraction Services
-Summary(pl.UTF-8):   Biblioteki do dostępu do RTAS z przestrzeni użytkownika
+Summary(pl.UTF-8):	Biblioteki do dostępu do RTAS z przestrzeni użytkownika
 Name:		librtas
 Version:	1.3.0
 Release:	1
@@ -22,7 +22,7 @@ PowerPC.
 
 %package devel
 Summary:	Header files for librtas library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki librtas
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki librtas
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -34,7 +34,7 @@ Pliki nagłówkowe biblioteki librtas.
 
 %package static
 Summary:	Static librtas library
-Summary(pl.UTF-8):   Statyczna biblioteka librtas
+Summary(pl.UTF-8):	Statyczna biblioteka librtas
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
