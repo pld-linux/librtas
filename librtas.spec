@@ -1,12 +1,12 @@
 Summary:	Libraries for user-space access to the Run-Time Abstraction Services
 Summary(pl.UTF-8):	Biblioteki do dostępu do RTAS z przestrzeni użytkownika
 Name:		librtas
-Version:	1.3.2
-Release:	2
+Version:	1.3.3
+Release:	1
 License:	CPL v1.0
 Group:		Libraries
 Source0:	http://librtas.ozlabs.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	0a3705d4983fbb18a1b98cbe15032318
+# Source0-md5:	054b1bf15f6f8058e747dc913cd78834
 URL:		http://librtas.ozlabs.org/
 ExclusiveArch:	ppc ppc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
