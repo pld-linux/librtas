@@ -1,13 +1,14 @@
 Summary:	Libraries for user-space access to the Run-Time Abstraction Services
 Summary(pl.UTF-8):	Biblioteki do dostępu do RTAS z przestrzeni użytkownika
 Name:		librtas
-Version:	1.3.3
+Version:	1.3.5
 Release:	1
 License:	CPL v1.0
 Group:		Libraries
 Source0:	http://librtas.ozlabs.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	054b1bf15f6f8058e747dc913cd78834
+# Source0-md5:	4e0ccef34f73dda153e8ce39c7fe8642
 URL:		http://librtas.ozlabs.org/
+# uses PowerPC-specific RTAS proc files/syscalls
 ExclusiveArch:	ppc ppc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -59,6 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 install librtas_src/librtas.a $RPM_BUILD_ROOT%{_libdir}
+/sbin/ldconfig -n $RPM_BUILD_ROOT%{_libdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -69,11 +71,19 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYRIGHT Changelog README
-%attr(755,root,root) %{_libdir}/librtas*.so.*.*.*
+%attr(755,root,root) %{_libdir}/libofdt.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libofdt.so.1
+%attr(755,root,root) %{_libdir}/librtas.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/librtas.so.1
+%attr(755,root,root) %{_libdir}/librtasevent.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/librtasevent.so.1
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/librtas*.so
+%attr(755,root,root) %{_libdir}/libofdt.so
+%attr(755,root,root) %{_libdir}/librtas.so
+%attr(755,root,root) %{_libdir}/librtasevent.so
+%{_includedir}/libofdt.h
 %{_includedir}/librtas*.h
 
 %files static
