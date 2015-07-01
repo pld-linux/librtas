@@ -1,13 +1,15 @@
 Summary:	Libraries for user-space access to the Run-Time Abstraction Services
 Summary(pl.UTF-8):	Biblioteki do dostępu do RTAS z przestrzeni użytkownika
 Name:		librtas
-Version:	1.3.8
-Release:	2
+Version:	1.3.13
+Release:	1
 License:	CPL v1.0
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/librtas/%{name}-%{version}.tar.gz
-# Source0-md5:	1d737ff4bc9a86b3e2cfd3a805f7632d
+# Source0-md5:	4b3e2ef81f80d8f05dad878f3d2bb640
 Patch0:		%{name}-lib64.patch
+Patch1:		%{name}-format.patch
+Patch2:		%{name}-verbose.patch
 URL:		http://librtas.sourceforge.net/
 # uses PowerPC-specific RTAS proc files/syscalls
 ExclusiveArch:	ppc ppc64
@@ -49,8 +51,8 @@ Statyczna biblioteka librtas.
 %prep
 %setup -q
 %patch0 -p1
-
-find . -name 'lib*.so*' | xargs %{__rm}
+%patch1 -p1
+%patch2 -p1
 
 %build
 CFLAGS="%{rpmcflags}" \
