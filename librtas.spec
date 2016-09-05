@@ -1,16 +1,19 @@
 Summary:	Libraries for user-space access to the Run-Time Abstraction Services
 Summary(pl.UTF-8):	Biblioteki do dostępu do RTAS z przestrzeni użytkownika
 Name:		librtas
-Version:	1.3.13
+Version:	2.0.1
 Release:	1
-License:	CPL v1.0
+License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://downloads.sourceforge.net/librtas/%{name}-%{version}.tar.gz
-# Source0-md5:	4b3e2ef81f80d8f05dad878f3d2bb640
-Patch0:		%{name}-lib64.patch
-Patch1:		%{name}-format.patch
-Patch2:		%{name}-verbose.patch
-URL:		http://librtas.sourceforge.net/
+#Source0Download: https://github.com/nfont/librtas/releases
+Source0:	https://github.com/nfont/librtas/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	3a3ee6c9aecef7721b5045bdd14daaa8
+Patch0:		%{name}-pc.patch
+URL:		https://github.com/nfont/librtas
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake >= 1:1.11
+BuildRequires:	libtool >= 2:2
+BuildRequires:	pkgconfig
 # uses PowerPC-specific RTAS proc files/syscalls
 ExclusiveArch:	ppc ppc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -51,13 +54,17 @@ Statyczna biblioteka librtas.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
-CFLAGS="%{rpmcflags}" \
-%{__make} \
-	CC="%{__cc}"
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure \
+	--disable-silent-rules
+
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -65,8 +72,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install librtas_src/librtas.a $RPM_BUILD_ROOT%{_libdir}
-/sbin/ldconfig -n $RPM_BUILD_ROOT%{_libdir}
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/librtas*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -76,23 +83,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYRIGHT Changelog README
-%attr(755,root,root) %{_libdir}/libofdt.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libofdt.so.1
+%doc Changelog README
 %attr(755,root,root) %{_libdir}/librtas.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/librtas.so.1
+%attr(755,root,root) %ghost %{_libdir}/librtas.so.2
 %attr(755,root,root) %{_libdir}/librtasevent.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/librtasevent.so.1
+%attr(755,root,root) %ghost %{_libdir}/librtasevent.so.2
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libofdt.so
 %attr(755,root,root) %{_libdir}/librtas.so
 %attr(755,root,root) %{_libdir}/librtasevent.so
-%{_includedir}/common.h
-%{_includedir}/libofdt.h
-%{_includedir}/librtas*.h
+%{_includedir}/librtas.h
+%{_includedir}/librtasevent*.h
+%{_pkgconfigdir}/librtas.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/librtas.a
+%{_libdir}/librtasevent.a
