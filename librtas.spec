@@ -1,14 +1,13 @@
 Summary:	Libraries for user-space access to the Run-Time Abstraction Services
 Summary(pl.UTF-8):	Biblioteki do dostępu do RTAS z przestrzeni użytkownika
 Name:		librtas
-Version:	2.0.2
+Version:	2.0.5
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-#Source0Download: https://github.com/nfont/librtas/releases
+#Source0Download: https://github.com/nfont/librtas/tags
 Source0:	https://github.com/nfont/librtas/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	4e4ae07fa10472c92e91a5e98d59f7da
-Patch0:		%{name}-pc.patch
+# Source0-md5:	6e4aedaa75dbfa2317c34a5ccbde040d
 URL:		https://github.com/nfont/librtas
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.11
@@ -53,7 +52,6 @@ Statyczna biblioteka librtas.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -95,7 +93,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/librtasevent.so
 %{_includedir}/librtas.h
 %{_includedir}/librtasevent*.h
-%{_pkgconfigdir}/librtas.pc
 
 %files static
 %defattr(644,root,root,755)
